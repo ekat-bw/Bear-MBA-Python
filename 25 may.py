@@ -1,7 +1,12 @@
 import openai
+import os
+from dotenv import load_dotenv
+
+# Load the .env file
+load_dotenv()
 
 # Set up your OpenAI API key
-openai.api_key = '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'
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Function to generate a suggestion
 def get_suggestion(prompt):
@@ -9,7 +14,7 @@ def get_suggestion(prompt):
         engine='text-davinci-003',
         prompt=prompt,
         max_tokens=50,
-        temperature=1.0,
+        temperature=0.7,
         n=1,
         stop=None,
         timeout=10
@@ -18,7 +23,7 @@ def get_suggestion(prompt):
 
 # Main program loop
 while True:
-    user_input = input("Define for me: ")
-    prompt = "Define this as accurately as possible?" + user_input + "\nChatGPT:"
+    user_input = input("I want to do something new: ")
+    prompt = "I am bored. What should I do next?" + user_input + "\nChatGPT:"
     suggestion = get_suggestion(prompt)
     print("ChatGPT:", suggestion)
